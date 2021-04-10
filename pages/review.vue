@@ -83,7 +83,7 @@ export default {
   },
   created() {
     axios
-      .get('http://localhost:8080/api/reviw/')
+      .get('http://localhost:8080/api/review/')
       .then((result) => {
         this.reviewList = result.data.data
       })
