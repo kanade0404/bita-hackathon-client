@@ -9,7 +9,12 @@
               <p class="restaurantInfo__image">
                 <img src="https://via.placeholder.com/100" alt="" />
               </p>
-              <figcaption class="restaurantInfo__name">店舗名</figcaption>
+              <figcaption class="restaurantInfo__name">
+                経度{{ currentLocation.longitude }}
+              </figcaption>
+              <figcaption class="restaurantInfo__name">
+                緯度{{ currentLocation.latitude }}
+              </figcaption>
             </figure>
           </li>
           <li class="topRestaurantList__item">
@@ -29,6 +34,17 @@
 <script>
 import axios from 'axios'
 export default {
+  data() {
+    return {
+      currentLocation: {
+        latitude: 0,
+        longitude: 0,
+      },
+    }
+  },
+  created() {
+    this.getCurrentLocation()
+  },
   methods: {
     getLocation() {
       axios.defaults.headers.get['Content-Type'] =
@@ -45,11 +61,29 @@ export default {
         },
       })
     },
+    async getCurrentLocation() {
+      await navigator.geolocation.getCurrentPosition((res) => {
+        this.currentLocation.longitude = res.coords.longitude
+        this.currentLocation.latitude = res.coords.latitude
+      })
+    },
   },
 }
 </script>
+<style lang="scss" scoped>
+* {
+  padding: 0;
+  margin: 0;
+}
+img {
+  vertical-align: bottom;
+  width: 100%;
+}
 
-<style scoped lang="scss">
+ul {
+  list-style: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -57,6 +91,8 @@ export default {
 }
 
 .top__heading {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
   text-align: left;
   color: #dc1214;
@@ -71,7 +107,9 @@ export default {
 }
 
 .topRestaurantList__item {
-  margin-bottom: 20px;
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
 }
 
 .restaurantInfo {
@@ -87,10 +125,14 @@ export default {
 
 .restaurantInfo__name {
   font-size: 20px;
+  padding: 20px;
   font-weight: bold;
 }
 
 .restaurantInfo__image {
-  margin-right: 20px;
+  text-align: center;
+  &::after {
+    content: '';
+  }
 }
 </style>
