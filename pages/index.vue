@@ -1,10 +1,4 @@
 <template>
-  <div class="container">
-    <div class="link"><NuxtLink to="/login">To Login</NuxtLink></div>
-    <div class="link"><NuxtLink to="/logout">To Logout</NuxtLink></div>
-    <div class="link"><NuxtLink to="/report">To Report</NuxtLink></div>
-    <div class="link"><NuxtLink to="/reviwe">To Review</NuxtLink></div>
-  </div>
 </template>
 
 <script>
