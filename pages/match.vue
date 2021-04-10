@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: 'Review',
+  name: 'Match',
   data() {
     return {
       userName: '工藤 昂大',
