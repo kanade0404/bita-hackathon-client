@@ -27,10 +27,28 @@
 </template>
 
 <script>
-export default {}
+import axios from 'axios'
+export default {
+  methods: {
+    getLocation() {
+      axios.defaults.headers.get['Content-Type'] =
+        'application/json;charset=utf-8'
+      axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
+      axios({
+        method: 'get',
+        url:
+          'https://maps.googleapis.com/maps/api/place/findplacefromtext/json',
+        data: {
+          input: 'Museum%20of%20Contemporary%20Art%20Australia',
+          key: '',
+          inputtype: 'textquery',
+        },
+      })
+    },
+  },
+}
 </script>
-
-<style scoped>
+<style lang="scss" scoped>
 * {
   padding: 0;
   margin: 0;
@@ -86,5 +104,9 @@ ul {
 
 .restaurantInfo__image {
   margin-right: 20px;
+  text-align: center;
+  &::after {
+    content: '';
+  }
 }
 </style>
