@@ -16,11 +16,11 @@
               </dd>
               <dt>経度</dt>
               <dd class="restaurantInfo__name">
-                {{ restaurant.lon }}
+                {{ restaurant.longitude }}
               </dd>
               <dt>緯度</dt>
               <dd class="restaurantInfo__name">
-                {{ restaurant.lat }}
+                {{ restaurant.latitude }}
               </dd>
             </dl>
           </li>
@@ -80,7 +80,6 @@ export default {
         .then((response) => {
           const { data } = response.data
           data.forEach((element) => {
-            console.log(element)
             this.nearRestaurants.push(element)
           })
         })
