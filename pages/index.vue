@@ -4,26 +4,25 @@
       <section class="top__mainContent">
         <h2 class="top__heading">店舗選択</h2>
         <ul class="topRestaurantList">
-          <li class="topRestaurantList__item">
-            <figure class="restaurantInfo">
-              <p class="restaurantInfo__image">
-                <img src="https://via.placeholder.com/100" alt="" />
-              </p>
-              <figcaption class="restaurantInfo__name">
-                経度{{ currentLocation.longitude }}
-              </figcaption>
-              <figcaption class="restaurantInfo__name">
-                緯度{{ currentLocation.latitude }}
-              </figcaption>
-            </figure>
-          </li>
-          <li class="topRestaurantList__item">
-            <figure class="restaurantInfo">
-              <p class="restaurantInfo__image">
-                <img src="https://via.placeholder.com/100" alt="" />
-              </p>
-              <figcaption class="restaurantInfo__name">店舗名</figcaption>
-            </figure>
+          <li
+            v-for="restaurant in nearRestaurants"
+            :key="restaurant"
+            class="topRestaurantList__item"
+          >
+            <dl class="restaurantInfo">
+              <dt>店舗名</dt>
+              <dd class="restaurantInfo__name">
+                {{ restaurant.name }}
+              </dd>
+              <dt>経度</dt>
+              <dd class="restaurantInfo__name">
+                {{ restaurant.lon }}
+              </dd>
+              <dt>緯度</dt>
+              <dd class="restaurantInfo__name">
+                {{ restaurant.lat }}
+              </dd>
+            </dl>
           </li>
         </ul>
       </section>
@@ -40,10 +39,11 @@ export default {
         latitude: 0,
         longitude: 0,
       },
+      nearRestaurants: [],
     }
   },
   created() {
-    this.getCurrentLocation()
+    this.getCurrentLocation().then(this.getNearRestaurant())
   },
   methods: {
     getLocation() {
@@ -68,6 +68,25 @@ export default {
           this.currentLocation.latitude = res.coords.latitude
         })
       }
+    },
+    async getNearRestaurant() {
+      await axios({
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+        },
+        method: 'get',
+        url: 'http://localhost:8080/api/store',
+      })
+        .then((response) => {
+          const { data } = response.data
+          data.forEach((element) => {
+            console.log(element)
+            this.nearRestaurants.push(element)
+          })
+        })
+        .catch((err) => {
+          console.log('err:', err)
+        })
     },
   },
 }
@@ -119,6 +138,7 @@ ul {
   align-items: center;
   border: 1px solid #000;
   transition: 0.2s;
+  padding: 20px;
 }
 
 .restaurantInfo:hover {
