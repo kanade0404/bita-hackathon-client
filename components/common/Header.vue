@@ -5,7 +5,7 @@
         <li class="link"><NuxtLink to="/login">To Login</NuxtLink></li>
         <li class="link"><NuxtLink to="/logout">To Logout</NuxtLink></li>
         <li class="link"><NuxtLink to="/report">To Report</NuxtLink></li>
-        <li class="link"><NuxtLink to="/reviwe">To Review</NuxtLink></li>
+        <li class="link"><NuxtLink to="/review">To Review</NuxtLink></li>
       </ul>
     </nav>
   </header>
