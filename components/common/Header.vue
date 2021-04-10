@@ -6,7 +6,7 @@
         <li class="link"><NuxtLink to="/logout">To Logout</NuxtLink></li>
         <li class="link"><NuxtLink to="/report">To Report</NuxtLink></li>
         <li class="link"><NuxtLink to="/review">To Review</NuxtLink></li>
-        <li class="login" @click="login">ログイン</li>
+        <a href="http://localhost:8080/auth/google" class="login">ログイン</a>
       </ul>
     </nav>
   </header>
@@ -17,13 +17,6 @@ import axios from 'axios'
 
 export default {
   name: 'Header',
-  methods: {
-    login() {
-      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
-      const res = axios.get('http://localhost:8080/auth/google')
-      console.log(res)
-    },
-  },
 }
 </script>
 

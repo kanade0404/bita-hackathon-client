@@ -1,9 +1,15 @@
 export const state = () => ({
-  counter: 0,
+  userData: {},
 })
 
 export const mutations = {
-  increment(state) {
-    state.counter++
+  setUser(state, payload) {
+    state.userData = payload
+  },
+}
+
+export const action = {
+  setUserActions: function ({ commit }, payload) {
+    commit('setUser', payload)
   },
 }
