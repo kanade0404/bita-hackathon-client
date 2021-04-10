@@ -9,7 +9,12 @@
               <p class="restaurantInfo__image">
                 <img src="https://via.placeholder.com/100" alt="" />
               </p>
-              <figcaption class="restaurantInfo__name">店舗名</figcaption>
+              <figcaption class="restaurantInfo__name">
+                経度{{ currentLocation.longitude }}
+              </figcaption>
+              <figcaption class="restaurantInfo__name">
+                緯度{{ currentLocation.latitude }}
+              </figcaption>
             </figure>
           </li>
           <li class="topRestaurantList__item">
@@ -29,6 +34,17 @@
 <script>
 import axios from 'axios'
 export default {
+  data() {
+    return {
+      currentLocation: {
+        latitude: 0,
+        longitude: 0,
+      },
+    }
+  },
+  created() {
+    this.getCurrentLocation()
+  },
   methods: {
     getLocation() {
       axios.defaults.headers.get['Content-Type'] =
@@ -43,6 +59,12 @@ export default {
           key: '',
           inputtype: 'textquery',
         },
+      })
+    },
+    async getCurrentLocation() {
+      await navigator.geolocation.getCurrentPosition((res) => {
+        this.currentLocation.longitude = res.coords.longitude
+        this.currentLocation.latitude = res.coords.latitude
       })
     },
   },
@@ -85,7 +107,9 @@ ul {
 }
 
 .topRestaurantList__item {
-  margin-bottom: 20px;
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
 }
 
 .restaurantInfo {
@@ -101,11 +125,11 @@ ul {
 
 .restaurantInfo__name {
   font-size: 20px;
+  padding: 20px;
   font-weight: bold;
 }
 
 .restaurantInfo__image {
-  margin-right: 20px;
   text-align: center;
   &::after {
     content: '';
