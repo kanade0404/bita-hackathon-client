@@ -13,7 +13,7 @@
         <div class="info">
           <p class="name">{{ userData.name }}</p>
           <div class="likes">
-            <span class="like" v-for="(item, index) in likes" :key="index">
+            <span v-for="(item, index) in likes" :key="index" class="like">
               #{{ item }}
             </span>
           </div>
@@ -107,6 +107,7 @@ export default {
 }
 
 .editWrapper {
+  margin: 0 auto;
   max-width: 800px;
 }
 
