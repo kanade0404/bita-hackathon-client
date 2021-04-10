@@ -16,10 +16,11 @@
         <span class="like" v-for="(item, index) in likes" :key="index">
           #{{ item }}
         </span>
-        <div class="edit">
+        <div class="edit edit--desc">
           <div class="edit__desc">description:</div>
           <textarea class="edit__textarea" type="text" />
         </div>
+        <button class="submit">送信</button>
       </div>
     </div>
   </div>
@@ -48,7 +49,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .usersMe {
   display: flex;
   justify-content: center;
@@ -69,6 +70,11 @@ export default {
   align-items: center;
   display: flex;
   margin-bottom: 10px;
+
+  &--desc {
+    display: block;
+    margin-bottom: 50px;
+  }
 }
 
 .edit__title {
@@ -89,13 +95,14 @@ export default {
 .like {
   display: inline-block;
   padding-right: 3px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .edit__desc {
   font-size: 20px;
   font-weight: bold;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .edit__textarea {
@@ -104,5 +111,18 @@ export default {
   padding: 8px;
   width: 300px;
   height: 100px;
+}
+
+.submit {
+  background-color: #4169e1;
+  color: #fff;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  height: 30px;
+  width: 200px;
 }
 </style>
