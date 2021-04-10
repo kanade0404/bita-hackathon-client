@@ -1,12 +1,14 @@
 <template>
-  <div class="container">logout</div>
+  <div class="container">
+    <NuxtLink to="/">Back To Home</NuxtLink>
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;
