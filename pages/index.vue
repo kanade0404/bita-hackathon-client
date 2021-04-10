@@ -1,63 +1,48 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">hoge</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+    <div class="link"><NuxtLink to="/login">To Login</NuxtLink></div>
+    <div class="link"><NuxtLink to="/logout">To Logout</NuxtLink></div>
+    <div class="link"><NuxtLink to="/report">To Report</NuxtLink></div>
+    <div class="link"><NuxtLink to="/review">To Review</NuxtLink></div>
+    <div @click="getLocation">Button</div>
   </div>
 </template>
 
 <script>
-export default {}
+import axios from 'axios'
+export default {
+  methods: {
+    getLocation() {
+      axios.defaults.headers.get['Content-Type'] =
+        'application/json;charset=utf-8'
+      axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
+      axios({
+        method: 'get',
+        url:
+          'https://maps.googleapis.com/maps/api/place/findplacefromtext/json',
+        data: {
+          input: 'Museum%20of%20Contemporary%20Art%20Australia',
+          key: '',
+          inputtype: 'textquery',
+        },
+      })
+    },
+  },
+}
 </script>
 
-<style>
+<style scoped lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  &::after {
+    content: '';
+  }
 }
 </style>
