@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="headerWrapper">
     <header v-if="hasUserData" class="header">
       <nav class="header__nav">
         <ul class="headerLinks">
@@ -19,6 +19,7 @@
         <ul class="tabMenu">
           <li class="tabMenu__link" @click="toHomeScreen">Home</li>
           <li class="tabMenu__link" @click="toReviewScreen">レビュー一覧</li>
+          <li class="tabMenu__link" @click="toMatchScreen">すれ違い一覧</li>
           <li class="tabMenu__link" @click="toUserScreen">ユーザー情報</li>
           <li class="tabMenu__link" @click="logout">ログアウト</li>
         </ul>
@@ -57,6 +58,11 @@ export default {
     const userId = url.searchParams.get('userId')
     const initToken = url.searchParams.get('token')
     const token = this.$cookies.get('token')
+    if (!userId && !token) {
+      window.location = '/login'
+      return
+    }
+
     if (token) {
       try {
         const { data } = await axios.get(
@@ -97,8 +103,11 @@ export default {
     },
     toReviewScreen() {
       this.setMenuClose()
-      this.isMenuVisible = false
       this.$router.push('/review')
+    },
+    toMatchScreen() {
+      this.setMenuClose()
+      this.$router.push('/match')
     },
     logout() {
       this.$cookies.set('token', '')
@@ -113,6 +122,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.headerWrapper {
+  height: 80px;
+}
+
 .header {
   display: flex;
   height: 80px;
