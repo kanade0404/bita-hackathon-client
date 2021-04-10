@@ -2,7 +2,7 @@
   <div class="container">
     <NuxtLink to="/">Back To Home</NuxtLink>
     <h1 class="title">{{ title }}</h1>
-    <ul>
+    <ul class="reviewItemList">
       <li>
         <header>
           <div>
@@ -21,7 +21,7 @@
             <br />今度一緒にスシロー行きましょう！
           </p>
         </article>
-        <ul>
+        <ul class="imagesList">
           <li>
             <img
               src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914219.jpg"
@@ -68,12 +68,15 @@ export default {
 </script>
 
 <style scoped>
+ul,
+li {
+  list-style: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
+  text-decoration: none;
 }
 </style>
