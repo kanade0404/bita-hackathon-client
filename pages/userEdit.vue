@@ -1,35 +1,44 @@
 <template>
-  <div class="container">
-    <div class="usersMe">
-      <div class="usersImg">
-        <img class="usersImg__img" :src="userData.picture" alt="サンプル画像" />
-      </div>
-      <div class="info">
-        <div class="edit">
-          <span class="edit__title">Name</span>
-          <input class="edit__input" type="text" :value="userData.name" />
+  <Fragment>
+    <Header />
+    <div class="container">
+      <div class="usersMe">
+        <div class="usersImg">
+          <img
+            class="usersImg__img"
+            :src="userData.picture"
+            alt="サンプル画像"
+          />
         </div>
-        <div class="edit">
-          <span class="edit__title">tags</span>
-          <input class="edit__input" type="text" />
+        <div class="info">
+          <div class="edit">
+            <span class="edit__title">Name</span>
+            <input class="edit__input" type="text" :value="userData.name" />
+          </div>
+          <div class="edit">
+            <span class="edit__title">tags</span>
+            <input class="edit__input" type="text" />
+          </div>
+          <span class="like" v-for="(item, index) in likes" :key="index">
+            #{{ item }}
+          </span>
+          <div class="edit edit--desc">
+            <div class="edit__desc">description</div>
+            <textarea class="edit__textarea" type="text" />
+          </div>
+          <button @click="changeProfile" class="submit">change</button>
         </div>
-        <span class="like" v-for="(item, index) in likes" :key="index">
-          #{{ item }}
-        </span>
-        <div class="edit edit--desc">
-          <div class="edit__desc">description</div>
-          <textarea class="edit__textarea" type="text" />
-        </div>
-        <button @click="changeProfile" class="submit">change</button>
       </div>
     </div>
-  </div>
+  </Fragment>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Header from '../components/common/Header'
 
 export default {
+  components: { Header },
   data() {
     return {
       likes: [

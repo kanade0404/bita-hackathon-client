@@ -1,81 +1,92 @@
 <template>
-  <div class="container">
-    <NuxtLink to="/">Back To Home</NuxtLink>
-    <h1 class="title">レビューリスト</h1>
-    <ul class="reviewItemList">
-      <li v-for="review in reviewList" :key="review.id" class="reviewItemCard">
-        <div class="cardHeader">
-          <div class="profileImgWrapper">
-            <img
-              class="profileImg"
-              src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
-              :alt="review.user.picture"
-            />
-          </div>
-          <div>
-            <div class="userName">{{ review.user.name }}</div>
-            <div class="rating">
-              評価 :
-              <span class="ratingStar">★★★</span>
+  <Fragment>
+    <Header />
+    <div class="container">
+      <NuxtLink to="/">Back To Home</NuxtLink>
+      <h1 class="title">レビューリスト</h1>
+      <ul class="reviewItemList">
+        <li
+          v-for="review in reviewList"
+          :key="review.id"
+          class="reviewItemCard"
+        >
+          <div class="cardHeader">
+            <div class="profileImgWrapper">
+              <img
+                class="profileImg"
+                src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                :alt="review.user.picture"
+              />
+            </div>
+            <div>
+              <div class="userName">{{ review.user.name }}</div>
+              <div class="rating">
+                評価 :
+                <span class="ratingStar">★★★</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="reviewWrapper">
-          <div class="reviewSentenceWrapper">
-            <p class="reviewSentence">
-              {{ review.content }}
-              スシローに行ってきました！回転寿司にも関わらず、新鮮なネタが多くて美味しいです！
-              オススメは『えび3点盛り』ですね。3種類のえびを食べられて味は大満足。値段も170円(だった気がする)なので財布にも優しいのが推しポイントです。
-              五反田のスシローはかなり人気なので、昼も夜も予約を取らないと入れないのが難点です。
-              13時に予約を取ろうとすると30,40分待ちはざらにあるため、予約するタイミングは10時に出勤してすぐが良いです。
-              今度一緒にスシロー行きましょう！
-            </p>
+          <div class="reviewWrapper">
+            <div class="reviewSentenceWrapper">
+              <p class="reviewSentence">
+                {{ review.content }}
+                スシローに行ってきました！回転寿司にも関わらず、新鮮なネタが多くて美味しいです！
+                オススメは『えび3点盛り』ですね。3種類のえびを食べられて味は大満足。値段も170円(だった気がする)なので財布にも優しいのが推しポイントです。
+                五反田のスシローはかなり人気なので、昼も夜も予約を取らないと入れないのが難点です。
+                13時に予約を取ろうとすると30,40分待ちはざらにあるため、予約するタイミングは10時に出勤してすぐが良いです。
+                今度一緒にスシロー行きましょう！
+              </p>
+            </div>
+            <ul class="photoImageList">
+              <li class="photoImageItemWrapper">
+                <img
+                  class="photoImageItem"
+                  src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914219.jpg"
+                  alt="店舗写真"
+                />
+              </li>
+              <li class="photoImageItemWrapper">
+                <img
+                  class="photoImageItem"
+                  src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914223.jpg"
+                  alt="店舗写真"
+                />
+              </li>
+              <li class="photoImageItemWrapper">
+                <img
+                  class="photoImageItem"
+                  src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/24430815.jpg"
+                  alt="店舗写真"
+                />
+              </li>
+            </ul>
           </div>
-          <ul class="photoImageList">
-            <li class="photoImageItemWrapper">
+          <div class="footerWrapper">
+            <div class="footerImgWrapper">
               <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914219.jpg"
-                alt="店舗写真"
+                class="footerImg"
+                src="https://illust8.com/wp-content/uploads/2018/08/weather_sun_solar_illust_1080.png"
+                alt="ランチ"
               />
-            </li>
-            <li class="photoImageItemWrapper">
-              <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914223.jpg"
-                alt="店舗写真"
-              />
-            </li>
-            <li class="photoImageItemWrapper">
-              <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/24430815.jpg"
-                alt="店舗写真"
-              />
-            </li>
-          </ul>
-        </div>
-        <div class="footerWrapper">
-          <div class="footerImgWrapper">
-            <img
-              class="footerImg"
-              src="https://illust8.com/wp-content/uploads/2018/08/weather_sun_solar_illust_1080.png"
-              alt="ランチ"
-            />
+            </div>
+            <div class="postedDate">2021/04/11</div>
+            <div class="favoriteNumber">70いいね</div>
           </div>
-          <div class="postedDate">2021/04/11</div>
-          <div class="favoriteNumber">70いいね</div>
-        </div>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+    </div>
+  </Fragment>
 </template>
 
 <script>
 import axios from 'axios'
+import Header from '../components/common/Header'
 
 export default {
   name: 'Review',
+  components: {
+    Header,
+  },
   data() {
     return {
       reviewList: [],

@@ -1,31 +1,40 @@
 <template>
-  <div class="container">
-    <div class="usersMe">
-      <div class="usersImg">
-        <img class="usersImg__img" :src="userData.picture" alt="サンプル画像" />
-      </div>
-      <div class="info">
-        <p class="name">{{ userData.name }}</p>
-        <div class="likes">
-          <span class="like" v-for="(item, index) in likes" :key="index">
-            #{{ item }}
-          </span>
+  <Fragment>
+    <Header />
+    <div class="container">
+      <div class="usersMe">
+        <div class="usersImg">
+          <img
+            class="usersImg__img"
+            :src="userData.picture"
+            alt="サンプル画像"
+          />
         </div>
-        <p class="description">
-          自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介
-        </p>
-      </div>
-      <div class="editWrapper">
-        <button class="edit" @click="toEditScreen">edit</button>
+        <div class="info">
+          <p class="name">{{ userData.name }}</p>
+          <div class="likes">
+            <span class="like" v-for="(item, index) in likes" :key="index">
+              #{{ item }}
+            </span>
+          </div>
+          <p class="description">
+            自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介
+          </p>
+        </div>
+        <div class="editWrapper">
+          <button class="edit" @click="toEditScreen">edit</button>
+        </div>
       </div>
     </div>
-  </div>
+  </Fragment>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Header from '../components/common/Header'
 
 export default {
+  components: { Header },
   data() {
     return {
       likes: [
