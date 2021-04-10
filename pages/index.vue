@@ -69,6 +69,8 @@ ul {
 }
 
 .top__heading {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
   text-align: left;
   color: #dc1214;
