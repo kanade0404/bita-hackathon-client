@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <NuxtLink to="/">Back To Home</NuxtLink>
+    <a class="login" href="http://localhost:8080/auth/google">ログイン</a>
   </div>
 </template>
 
@@ -16,5 +16,17 @@ export default {}
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.login {
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: #4169e1;
+  height: 40px;
+  width: 200px;
 }
 </style>
