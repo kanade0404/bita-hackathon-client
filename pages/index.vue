@@ -31,19 +31,6 @@ export default {}
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-}
-img {
-  vertical-align: bottom;
-  width: 100%;
-}
-
-ul {
-  list-style: none;
-}
-
 .container {
   margin: 0 auto;
   min-height: 100vh;
