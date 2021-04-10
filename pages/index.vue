@@ -62,10 +62,12 @@ export default {
       })
     },
     async getCurrentLocation() {
-      await navigator.geolocation.getCurrentPosition((res) => {
-        this.currentLocation.longitude = res.coords.longitude
-        this.currentLocation.latitude = res.coords.latitude
-      })
+      if (typeof window !== 'undefined') {
+        await navigator.geolocation.getCurrentPosition((res) => {
+          this.currentLocation.longitude = res.coords.longitude
+          this.currentLocation.latitude = res.coords.latitude
+        })
+      }
     },
   },
 }
