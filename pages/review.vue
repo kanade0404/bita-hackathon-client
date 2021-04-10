@@ -3,17 +3,17 @@
     <NuxtLink to="/">Back To Home</NuxtLink>
     <h1 class="title">レビューリスト</h1>
     <ul class="reviewItemList">
-      <li v-for="review in reviewList" :key="review" class="reviewItemCard">
+      <li v-for="review in reviewList" :key="review.id" class="reviewItemCard">
         <div class="cardHeader">
           <div class="profileImgWrapper">
             <img
               class="profileImg"
               src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
-              alt="プロフィール写真"
+              :alt="review.user.picture"
             />
           </div>
           <div>
-            <div class="userName">{{ userName }}</div>
+            <div class="userName">{{ review.user.name }}</div>
             <div class="rating">
               評価 :
               <span class="ratingStar">★★★</span>
@@ -23,6 +23,7 @@
         <div class="reviewWrapper">
           <div class="reviewSentenceWrapper">
             <p class="reviewSentence">
+              {{ review.content }}
               スシローに行ってきました！回転寿司にも関わらず、新鮮なネタが多くて美味しいです！
               オススメは『えび3点盛り』ですね。3種類のえびを食べられて味は大満足。値段も170円(だった気がする)なので財布にも優しいのが推しポイントです。
               五反田のスシローはかなり人気なので、昼も夜も予約を取らないと入れないのが難点です。
@@ -71,13 +72,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Review',
   data() {
     return {
-      userName: '工藤 昂大',
-      reviewList: [1, 2, 3, 4, 5],
+      reviewList: [],
     }
+  },
+  created() {
+    axios
+      .get('http://localhost:8080/api/reviw/')
+      .then((result) => {
+        this.reviewList = result.data.data
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
   },
 }
 </script>
