@@ -1,10 +1,29 @@
 <template>
-  <div class="container">
-    <div class="link"><NuxtLink to="/login">To Login</NuxtLink></div>
-    <div class="link"><NuxtLink to="/logout">To Logout</NuxtLink></div>
-    <div class="link"><NuxtLink to="/report">To Report</NuxtLink></div>
-    <div class="link"><NuxtLink to="/reviwe">To Review</NuxtLink></div>
-  </div>
+  <main class="top">
+    <div class="container">
+      <section class="top__mainContent">
+        <h2 class="top__heading">店舗選択</h2>
+        <ul class="topRestaurantList">
+          <li class="topRestaurantList__item">
+            <figure class="restaurantInfo">
+              <p class="restaurantInfo__image">
+                <img src="https://via.placeholder.com/100" alt="" />
+              </p>
+              <figcaption class="restaurantInfo__name">店舗名</figcaption>
+            </figure>
+          </li>
+          <li class="topRestaurantList__item">
+            <figure class="restaurantInfo">
+              <p class="restaurantInfo__image">
+                <img src="https://via.placeholder.com/100" alt="" />
+              </p>
+              <figcaption class="restaurantInfo__name">店舗名</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -12,17 +31,60 @@ export default {}
 </script>
 
 <style scoped>
+* {
+  padding: 0;
+  margin: 0;
+}
+img {
+  vertical-align: bottom;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  max-width: 1000px;
 }
 
-.link {
-  display: ;
+.top__heading {
+  margin-bottom: 20px;
+  text-align: left;
+  color: #dc1214;
+}
+
+.top__mainContent {
+  width: 100%;
+}
+
+.topRestaurantList {
+  margin: 0 auto;
+}
+
+.topRestaurantList__item {
+  margin-bottom: 20px;
+}
+
+.restaurantInfo {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  transition: 0.2s;
+}
+
+.restaurantInfo:hover {
+  opacity: 0.7;
+}
+
+.restaurantInfo__name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.restaurantInfo__image {
+  margin-right: 20px;
 }
 </style>
