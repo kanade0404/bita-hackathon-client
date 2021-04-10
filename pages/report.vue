@@ -1,7 +1,11 @@
 <template>
   <main class="report">
     <div class="container">
-      <form class="reviewForm" action="" method="post">
+      <form
+        class="reviewForm"
+        action="http://localhost:8080/api/review"
+        method="post"
+      >
         <fieldset class="reviewForm__item">
           <legend class="reviewForm__title">店舗レビュー</legend>
           <input
