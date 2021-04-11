@@ -1,83 +1,105 @@
 <template>
   <div class="container">
     <NuxtLink to="/">Back To Home</NuxtLink>
-    <h1 class="title">レビューリスト</h1>
-    <ul class="reviewItemList">
-      <li v-for="review in reviewList" :key="review" class="reviewItemCard">
-        <div class="cardHeader">
-          <div class="profileImgWrapper">
-            <img
-              class="profileImg"
-              src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
-              alt="プロフィール写真"
-            />
-          </div>
-          <div>
-            <div class="userName">{{ userName }}</div>
-            <div class="rating">
-              評価 :
-              <span class="ratingStar">★★★</span>
+    <div class="selectTypeTab">
+      <div
+        class="title"
+        :class="{ isActive: showListFlag }"
+        @click="selectListType('common')"
+      >
+        Match!
+      </div>
+      <div
+        class="title"
+        :class="{ isActive: !showListFlag }"
+        @click="selectListType('uncommon')"
+      >
+        Not match
+      </div>
+    </div>
+    <div v-show="showListFlag">
+      <transition-group name="richUi" tag="ul" class="matchItemList">
+        <li
+          v-for="commonMatchUser in commonMatchList"
+          :key="commonMatchUser.id"
+          class="matchItemCard"
+        >
+          <div class="cardInner">
+            <div class="profileImgWrapper">
+              <img
+                class="profileImg"
+                src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                :alt="commonMatchUser.user.picture"
+              />
             </div>
+            <div>
+              <div class="userName">{{ commonMatchUser.user.name }}</div>
+            </div>
+            <div class="matchNumber">5</div>
           </div>
-        </div>
-        <div class="reviewWrapper">
-          <div class="reviewSentenceWrapper">
-            <p class="reviewSentence">
-              スシローに行ってきました！回転寿司にも関わらず、新鮮なネタが多くて美味しいです！
-              オススメは『えび3点盛り』ですね。3種類のえびを食べられて味は大満足。値段も170円(だった気がする)なので財布にも優しいのが推しポイントです。
-              五反田のスシローはかなり人気なので、昼も夜も予約を取らないと入れないのが難点です。
-              13時に予約を取ろうとすると30,40分待ちはざらにあるため、予約するタイミングは10時に出勤してすぐが良いです。
-              今度一緒にスシロー行きましょう！
-            </p>
+        </li>
+      </transition-group>
+    </div>
+    <div v-show="!showListFlag">
+      <ul class="matchItemList">
+        <li
+          v-for="uncommonMatchUser in uncommonMatchList"
+          :key="uncommonMatchUser.id"
+          class="notMatchItemCard"
+        >
+          <div class="notMatchCardHeader">
+            <div class="notMatchProfileWrapper">
+              <img
+                class="profileImg"
+                src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                :alt="uncommonMatchUser.user.picture"
+              />
+            </div>
+            <div class="userName">KU{{ uncommonMatchUser.user.name }}DO</div>
           </div>
-          <ul class="photoImageList">
-            <li class="photoImageItemWrapper">
-              <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914219.jpg"
-                alt="店舗写真"
-              />
-            </li>
-            <li class="photoImageItemWrapper">
-              <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/13914223.jpg"
-                alt="店舗写真"
-              />
-            </li>
-            <li class="photoImageItemWrapper">
-              <img
-                class="photoImageItem"
-                src="https://ximg.retty.me/crop/s200x200/-/retty/img_repo/l/01/24430815.jpg"
-                alt="店舗写真"
-              />
+          <ul class="commonTagsList">
+            <li
+              v-for="commonProfile in commonProfiles"
+              :key="commonProfile"
+              class="commonTagItem"
+            >
+              出身地が近しい
             </li>
           </ul>
-        </div>
-        <div class="footerWrapper">
-          <div class="footerImgWrapper">
-            <img
-              class="footerImg"
-              src="https://illust8.com/wp-content/uploads/2018/08/weather_sun_solar_illust_1080.png"
-              alt="ランチ"
-            />
-          </div>
-          <div class="postedDate">2021/04/11</div>
-          <div class="favoriteNumber">70いいね</div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Match',
   data() {
     return {
-      userName: '工藤 昂大',
-      reviewList: [1, 2, 3, 4, 5],
+      commonMatchList: [],
+      uncommonMatchList: [],
+      showListFlag: true,
+      commonProfiles: [1, 2, 3, 4],
     }
+  },
+  created() {
+    axios
+      .get('http://localhost:8080/api/review/')
+      .then((result) => {
+        this.commonMatchList = result.data.data
+        this.uncommonMatchList = result.data.data
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  },
+  methods: {
+    selectListType(showListType) {
+      this.showListFlag = showListType === 'common'
+    },
   },
 }
 </script>
@@ -90,25 +112,72 @@ export default {
   padding: 0 20px 20px;
 }
 
+.selectTypeTab {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
 .title {
   font-weight: 600;
   font-size: 1.2em;
-  margin-top: 10px;
+  padding-bottom: 5px;
+
+  &.isActive {
+    border-bottom: 3px solid #ff8856;
+  }
+}
+.richUi-move {
+  transition: 1s;
+}
+.matchDisplay-enter {
+  position: relative;
+  top: 10px;
+  opacity: 0;
+}
+.matchDisplay-enter-active {
+  opacity: 0.5;
+}
+.matchDisplay-leave {
+  top: 0;
+  opacity: 1;
+}
+.matchDisplay-leave-active {
+  top: 10px;
+  opacity: 0.5;
 }
 
-.reviewItemList {
+.matchItemList {
   border-top: 1px solid #d5d5d8;
-  margin-top: 10px;
-}
-.reviewItemCard {
-  border-bottom: 1px solid #d5d5d8;
-  padding: 10px 0;
 }
 
-.cardHeader {
+.matchItemCard {
+  border-bottom: 1px solid #d5d5d8;
+  padding: 10px 15px;
+  box-shadow: 0 0 6px #ddd;
+  margin: 15px 0;
+  border-radius: 5px;
+}
+.notMatchItemCard {
+  border-bottom: 1px solid #d5d5d8;
+  padding: 10px 15px 10px;
+  box-shadow: 0 0 6px #ddd;
+  margin: 15px 0;
+  border-radius: 5px;
+  min-height: 57.5px;
+}
+.cardInner {
   display: flex;
+  align-items: center;
+}
+.notMatchCardHeader {
+  display: flex;
+  align-items: center;
 }
 .profileImgWrapper {
+  height: 15vw;
+  margin-right: 10px;
+}
+.notMatchProfileWrapper {
   height: 10vw;
   margin-right: 10px;
 }
@@ -122,79 +191,30 @@ export default {
   font-weight: 700;
   margin-bottom: 3px;
 }
-.rating {
-  color: #6c6c75;
-  font-size: 0.85rem;
-}
-.ratingStar {
-  color: #e00031;
+.matchNumber {
+  border-radius: 50%;
+  background-color: #ff8856;
+  color: #fff;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin-left: auto;
+  padding-top: 1px;
 }
 
-.reviewWrapper {
-  margin-top: 10px;
-}
-.reviewSentenceWrapper {
-  position: relative;
-  line-height: 1.35;
-  max-height: calc(1.35em * 2);
-  overflow: hidden;
-  font-size: 0.85rem;
-  color: #2e2e3b;
-
-  &::before {
-    content: '…';
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 40%
-    );
-    padding-left: 1em;
-  }
-
-  &::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    margin-left: -1em;
-    position: absolute;
-    background: #fff;
-  }
-}
-.photoImageList {
+.commonTagsList {
   display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
 }
-.photoImageItemWrapper {
-  height: 30vw;
-  margin-right: 10px;
-}
-.photoImageItem {
-  height: 100%;
-}
-
-.footerWrapper {
-  color: #6c6c75;
-  display: flex;
-  align-items: center;
-  font-size: 0.7rem;
-  margin-top: 18px;
-}
-.footerImgWrapper {
-  height: 3vh;
-  margin-right: 5px;
-}
-.footerImg {
-  height: 100%;
-}
-.postedDate {
-  margin-right: 5px;
-}
-.favoriteNumber {
-  margin-right: 5px;
+.commonTagItem {
+  color: #ff773e;
+  background-color: #ffdbc9;
+  border-radius: 10px;
+  padding: 4px 6px;
+  font-weight: 600;
+  font-size: 80%;
+  margin: 2.5px;
 }
 </style>
