@@ -52,6 +52,7 @@
     </div>
     <div v-show="isModalOpen" class="confirmModal">
       <div class="confirmModal__inner">
+        <p class="confirmModal__title">店舗情報の登録が完了しました</p>
         <p class="confirmModal__title">レビューを書きますか？</p>
         <div class="confirmModal__buttonWrapper">
           <button class="button button--secondly" @click="toMatchScreen()">
@@ -196,6 +197,7 @@ ul {
   border: 1px solid #000;
   transition: 0.2s;
   padding: 20px;
+  cursor: pointer;
 }
 
 .restaurantInfo:hover {
@@ -236,13 +238,16 @@ ul {
 .confirmModal__title {
   font-size: 20px;
   text-align: center;
-  margin-bottom: 20px;
   font-weight: bold;
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
 }
 
 .confirmModal__buttonWrapper {
   display: flex;
   justify-content: center;
+  margin-top: 40px;
 }
 
 .button {
