@@ -46,9 +46,7 @@ export default {
       return this.userData.profile ? this.userData.profile.name : ''
     },
     setImg() {
-      return this.userData.profile
-        ? `data:image/png;base64,${this.userData.profile.picture}`
-        : ''
+      return this.userData.profile ? `${this.userData.profile.picture}` : ''
     },
   },
   async mounted() {
@@ -63,7 +61,7 @@ export default {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/api/user/${userId}`
+        `${process.env.baseUrl}/api/user/${userId}`
       )
       this.setUserActions(data.data)
       return
@@ -95,7 +93,7 @@ export default {
     },
     logout() {
       this.$cookies.set('token', '')
-      window.location = 'http://localhost:8080/logout'
+      window.location = `${process.env.baseUrl}/logout`
     },
     toHomeScreen() {
       this.setMenuClose()

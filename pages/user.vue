@@ -55,9 +55,7 @@ export default {
       return this.userData.profile ? this.userData.profile.name : ''
     },
     setImg() {
-      return this.userData.profile
-        ? `data:image/png;base64,${this.userData.profile.picture}`
-        : ''
+      return this.userData.profile ? this.userData.profile.picture : ''
     },
   },
   methods: {

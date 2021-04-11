@@ -118,7 +118,7 @@ export default {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
         },
         method: 'get',
-        url: 'http://localhost:8080/api/store',
+        url: `/api/store`,
       })
         .then((response) => {
           const { data } = response.data
