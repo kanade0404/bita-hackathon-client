@@ -1,30 +1,41 @@
 <template>
-  <main class="report">
-    <div class="container">
-      <form
-        class="reviewForm"
-        action="http://localhost:8080/api/review"
-        method="post"
-      >
-        <fieldset class="reviewForm__item">
-          <legend class="reviewForm__title">店舗レビュー</legend>
-          <input
-            type="textarea"
-            name="content"
-            value=""
-            class="reviewForm__inputTextarea"
-          />
-        </fieldset>
-        <input type="hidden" name="userId" value="" />
-        <input type="hidden" name="reviewId" value="" />
-        <button class="reviewForm__submitButton" type="submit">投稿する</button>
-      </form>
-    </div>
-  </main>
+  <Fragment>
+    <Header />
+    <main class="report">
+      <div class="container">
+        <form
+          class="reviewForm"
+          action="http://localhost:8080/api/review"
+          method="post"
+        >
+          <fieldset class="reviewForm__item">
+            <legend class="reviewForm__title">店舗レビュー</legend>
+            <textarea
+              type="text"
+              name="content"
+              value=""
+              class="reviewForm__inputTextarea"
+            />
+          </fieldset>
+          <input type="hidden" name="userId" value="" />
+          <input type="hidden" name="reviewId" value="" />
+          <button class="reviewForm__submitButton" type="submit">
+            投稿する
+          </button>
+        </form>
+      </div>
+    </main>
+  </Fragment>
 </template>
 
 <script>
-export default {}
+import Header from '../components/common/Header'
+
+export default {
+  components: {
+    Header,
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,6 +50,8 @@ export default {}
 
 .reviewForm {
   margin-bottom: 20px;
+  width: 80%;
+  max-width: 600px;
 }
 
 .reviewForm__item {
@@ -47,12 +60,20 @@ export default {}
 }
 
 .reviewForm__title {
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
   margin-bottom: 20px;
 }
 
 .reviewForm__inputTextarea {
-  border: 1px solid #000;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  padding: 8px;
+  height: 3em;
+  font-size: 16px;
   width: 100%;
+  resize: vertical;
 }
 
 .reviewForm__submitButton {

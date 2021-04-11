@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <NuxtLink to="/">Back To Home</NuxtLink>
+    <div class="inner">
+      <h1 class="logo" @click="toHomeScreen">
+        <img class="logo__img" src="/logo.png" alt="ロゴ" />
+      </h1>
+      <a class="login" href="http://localhost:8080/auth/google">ログイン</a>
+    </div>
   </div>
 </template>
 
@@ -15,6 +20,29 @@ export default {}
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+}
+
+.logo {
+  cursor: pointer;
+  height: 150px;
+  width: 150px;
+  margin: 0 auto 30px;
+}
+
+.logo__img {
+  height: 150px;
+  width: 150px;
+}
+
+.login {
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: #4169e1;
+  height: 40px;
+  width: 200px;
 }
 </style>

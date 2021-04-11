@@ -1,82 +1,87 @@
 <template>
-  <div class="container">
-    <NuxtLink to="/">Back To Home</NuxtLink>
-    <div class="selectTypeTab">
-      <div
-        class="title"
-        :class="{ isActive: showListFlag }"
-        @click="selectListType('common')"
-      >
-        Match!
-      </div>
-      <div
-        class="title"
-        :class="{ isActive: !showListFlag }"
-        @click="selectListType('uncommon')"
-      >
-        Not match
-      </div>
-    </div>
-    <div v-show="showListFlag">
-      <transition-group name="richUi" tag="ul" class="matchItemList">
-        <li
-          v-for="commonMatchUser in commonMatchList"
-          :key="commonMatchUser.id"
-          class="matchItemCard"
+  <Fragment>
+    <Header />
+    <div class="container">
+      <NuxtLink to="/">Back To Home</NuxtLink>
+      <div class="selectTypeTab">
+        <div
+          class="title"
+          :class="{ isActive: showListFlag }"
+          @click="selectListType('common')"
         >
-          <div class="cardInner">
-            <div class="profileImgWrapper">
-              <img
-                class="profileImg"
-                src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
-                :alt="commonMatchUser.user.picture"
-              />
-            </div>
-            <div>
-              <div class="userName">{{ commonMatchUser.user.name }}</div>
-            </div>
-            <div class="matchNumber">5</div>
-          </div>
-        </li>
-      </transition-group>
-    </div>
-    <div v-show="!showListFlag">
-      <ul class="matchItemList">
-        <li
-          v-for="uncommonMatchUser in uncommonMatchList"
-          :key="uncommonMatchUser.id"
-          class="notMatchItemCard"
+          Match!
+        </div>
+        <div
+          class="title"
+          :class="{ isActive: !showListFlag }"
+          @click="selectListType('uncommon')"
         >
-          <div class="notMatchCardHeader">
-            <div class="notMatchProfileWrapper">
-              <img
-                class="profileImg"
-                src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
-                :alt="uncommonMatchUser.user.picture"
-              />
+          Not match
+        </div>
+      </div>
+      <div v-show="showListFlag">
+        <transition-group name="richUi" tag="ul" class="matchItemList">
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">5</div>
             </div>
-            <div class="userName">KU{{ uncommonMatchUser.user.name }}DO</div>
-          </div>
-          <ul class="commonTagsList">
-            <li
-              v-for="commonProfile in commonProfiles"
-              :key="commonProfile"
-              class="commonTagItem"
-            >
-              出身地が近しい
-            </li>
-          </ul>
-        </li>
-      </ul>
+          </li>
+        </transition-group>
+      </div>
+      <div v-show="!showListFlag">
+        <ul class="matchItemList">
+          <li
+            v-for="uncommonMatchUser in uncommonMatchList"
+            :key="uncommonMatchUser.id"
+            class="notMatchItemCard"
+          >
+            <div class="notMatchCardHeader">
+              <div class="notMatchProfileWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                  :alt="uncommonMatchUser.user.picture"
+                />
+              </div>
+              <div class="userName">KU{{ uncommonMatchUser.user.name }}DO</div>
+            </div>
+            <ul class="commonTagsList">
+              <li
+                v-for="commonProfile in commonProfiles"
+                :key="commonProfile"
+                class="commonTagItem"
+              >
+                出身地が近しい
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </Fragment>
 </template>
 
 <script>
 import axios from 'axios'
+import Header from '../components/common/Header'
 
 export default {
   name: 'Match',
+  components: { Header },
   data() {
     return {
       commonMatchList: [],
