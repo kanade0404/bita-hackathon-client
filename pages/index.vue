@@ -4,7 +4,6 @@
     <div class="container">
       <section class="top__mainContent">
         <h2 class="top__heading">店舗選択</h2>
-        <p @click="handleModalOpen()">モーダルテスト</p>
         <ul class="topRestaurantList">
           <li
             v-for="restaurant in nearRestaurants"
@@ -16,14 +15,36 @@
               <dd class="restaurantInfo__name">
                 {{ restaurant.name }}
               </dd>
-              <dt>経度</dt>
-              <dd class="restaurantInfo__name">
-                {{ restaurant.longitude }}
-              </dd>
-              <dt>緯度</dt>
-              <dd class="restaurantInfo__name">
-                {{ restaurant.latitude }}
-              </dd>
+            </dl>
+          </li>
+          <li
+            @click="handleModalOpen()"
+            :key="restaurant"
+            class="topRestaurantList__item"
+          >
+            <dl class="restaurantInfo">
+              <dt>店舗名</dt>
+              <dd class="restaurantInfo__name">スシロー</dd>
+            </dl>
+          </li>
+          <li
+            @click="handleModalOpen()"
+            :key="restaurant"
+            class="topRestaurantList__item"
+          >
+            <dl class="restaurantInfo">
+              <dt>店舗名</dt>
+              <dd class="restaurantInfo__name">雪月花</dd>
+            </dl>
+          </li>
+          <li
+            @click="handleModalOpen()"
+            :key="restaurant"
+            class="topRestaurantList__item"
+          >
+            <dl class="restaurantInfo">
+              <dt>店舗名</dt>
+              <dd class="restaurantInfo__name">らがん</dd>
             </dl>
           </li>
         </ul>
@@ -108,7 +129,7 @@ export default {
           })
         })
         .catch((err) => {
-          console.error('err:', err)
+          Error(err)
         })
     },
     toMatchScreen() {
@@ -143,14 +164,16 @@ ul {
   margin: 0 auto;
   min-height: 100vh;
   max-width: 1000px;
+  padding: 20px;
 }
 
 .top__heading {
-  font-size: 28px;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.2em;
   margin-bottom: 20px;
   text-align: left;
-  color: #dc1214;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d5d5d8;
 }
 
 .top__mainContent {
@@ -181,7 +204,7 @@ ul {
 
 .restaurantInfo__name {
   font-size: 20px;
-  padding: 20px;
+  margin-left: 20px;
   font-weight: bold;
 }
 
@@ -227,12 +250,17 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000;
-  padding: 4px;
-  font-size: 12px;
-
+  padding: 8px 10px;
+  font-size: 14px;
+  background-color: #4169e1;
+  font-weight: bold;
+  color: #fff;
   &:not(:last-of-type) {
     margin-right: 12px;
   }
+}
+
+.button--secondly {
+  background-color: #b0c4de;
 }
 </style>
