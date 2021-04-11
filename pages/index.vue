@@ -33,10 +33,10 @@
       <div class="confirmModal__inner">
         <p class="confirmModal__title">レビューを書きますか？</p>
         <div class="confirmModal__buttonWrapper">
-          <button class="button button--secondly" @click="toMatchScreen">
+          <button class="button button--secondly" @click="toMatchScreen()">
             レビューを見る
           </button>
-          <button class="button button--success" @click="toMatchScreen">
+          <button class="button button--success" @click="toReportScreen()">
             レビューを書く
           </button>
         </div>
