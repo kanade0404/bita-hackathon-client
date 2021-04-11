@@ -13,7 +13,8 @@
         <div class="info">
           <div class="edit">
             <span class="edit__title">Name</span>
-            <input class="edit__input" type="text" :value="userData.name" />
+            <div v-if="">{{}}</div>
+            <input class="edit__input" type="text" v-model="editUserName" />
           </div>
           <div class="edit">
             <span class="edit__title">tags</span>
@@ -41,6 +42,10 @@ export default {
   components: { Header },
   data() {
     return {
+      editUserName: '',
+      editTags: [],
+      editDescription: '',
+      editImg: '',
       likes: [
         'モンスターハンター',
         '柿',
@@ -53,8 +58,21 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.editUserName = this.userData.profile ? this.userData.profile.name : ''
+    this.editTags = this.userData.tags
+    this.editImg = this.userData.profile ? this.userData.profile.picture : ''
+  },
   computed: {
     ...mapState(['userData']),
+    userName() {
+      return this.userData.profile ? this.userData.profile.name : ''
+    },
+    setImg() {
+      return this.userData.profile
+        ? `data:image/png;base64,${this.userData.profile.picture}`
+        : ''
+    },
   },
   methods: {
     changeProfile() {

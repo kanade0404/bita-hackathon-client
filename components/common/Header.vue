@@ -9,7 +9,7 @@
           <div class="userName">{{ userName }}</div>
           <div class="iconWrapper">
             <div class="icon" @click="setMenuOpen">
-              <img class="icon__img" :src="userData.picture" alt="" />
+              <img class="icon__img" :src="setImg" alt="" />
             </div>
           </div>
         </ul>
@@ -37,52 +37,36 @@ export default {
   data() {
     return {
       isMenuVisible: false,
+      hasUserData: false,
     }
   },
   computed: {
     ...mapState(['userData']),
     userName() {
-      return this.userData.name
+      return this.userData.profile ? this.userData.profile.name : ''
     },
     setImg() {
-      return `data:image/png;base64,${this.userData.picture}`
-    },
-    hasUserData() {
-      return this.userData.id
+      return this.userData.profile
+        ? `data:image/png;base64,${this.userData.profile.picture}`
+        : ''
     },
   },
   async mounted() {
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
+    const userId = this.$cookies.get('userId')
+    this.hasUserData = Boolean(userId)
 
-    const url = new URL(window.location)
-    const userId = url.searchParams.get('userId')
-    const initToken = url.searchParams.get('token')
-    const token = this.$cookies.get('token')
-    if (!userId && !token) {
+    if (!userId) {
       window.location = '/login'
       return
     }
-
-    if (token) {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:8080/api/user/${userId}`
-        )
-        this.setUserActions(data.data)
-        return
-      } catch (error) {
-        alert('処理に失敗しました')
-      }
-    }
-
-    if (!userId || !initToken) return
 
     try {
       const { data } = await axios.get(
         `http://localhost:8080/api/user/${userId}`
       )
       this.setUserActions(data.data)
-      this.$cookies.set('token', initToken)
+      return
     } catch (error) {
       alert('処理に失敗しました')
     }
