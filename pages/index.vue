@@ -4,7 +4,7 @@
     <div class="container">
       <section class="top__mainContent">
         <h2 class="top__heading">店舗選択</h2>
-        <p @click="handleModalOpen">モーダルテスト</p>
+        <p @click="handleModalOpen()">モーダルテスト</p>
         <ul class="topRestaurantList">
           <li
             v-for="restaurant in nearRestaurants"
