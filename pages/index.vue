@@ -55,7 +55,7 @@
         <p class="confirmModal__title">店舗情報の登録が完了しました</p>
         <p class="confirmModal__title">レビューを書きますか？</p>
         <div class="confirmModal__buttonWrapper">
-          <button class="button button--secondly" @click="toMatchScreen()">
+          <button class="button button--secondly" @click="toReviewScreen()">
             レビューを見る
           </button>
           <button class="button button--success" @click="toReportScreen()">
@@ -140,6 +140,10 @@ export default {
     toReportScreen() {
       this.handleModalOpen()
       this.$router.push('/report')
+    },
+    toReviewScreen() {
+      this.handleModalOpen()
+      this.$router.push('/review')
     },
     handleModalOpen() {
       this.isModalOpen = !this.isModalOpen
