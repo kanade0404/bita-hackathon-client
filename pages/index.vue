@@ -4,6 +4,7 @@
     <div class="container">
       <section class="top__mainContent">
         <h2 class="top__heading">店舗選択</h2>
+        <p @click="handleModalOpen()">モーダルテスト</p>
         <ul class="topRestaurantList">
           <li
             v-for="restaurant in nearRestaurants"
@@ -28,6 +29,19 @@
         </ul>
       </section>
     </div>
+    <div v-show="isModalOpen" class="confirmModal">
+      <div class="confirmModal__inner">
+        <p class="confirmModal__title">レビューを書きますか？</p>
+        <div class="confirmModal__buttonWrapper">
+          <button class="button button--secondly" @click="toMatchScreen()">
+            レビューを見る
+          </button>
+          <button class="button button--success" @click="toReportScreen()">
+            レビューを書く
+          </button>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -46,10 +60,11 @@ export default {
         longitude: 0,
       },
       nearRestaurants: [],
+      isModalOpen: false,
     }
   },
   created() {
-    this.getCurrentLocation().then(this.getNearRestaurant())
+    this.getNearRestaurant()
   },
   methods: {
     getLocation() {
@@ -95,6 +110,17 @@ export default {
         .catch((err) => {
           console.error('err:', err)
         })
+    },
+    toMatchScreen() {
+      this.handleModalOpen()
+      this.$router.push('/match')
+    },
+    toReportScreen() {
+      this.handleModalOpen()
+      this.$router.push('/report')
+    },
+    handleModalOpen() {
+      this.isModalOpen = !this.isModalOpen
     },
   },
 }
@@ -163,6 +189,50 @@ ul {
   text-align: center;
   &::after {
     content: '';
+  }
+}
+
+.confirmModal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.confirmModal__inner {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.confirmModal__title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.confirmModal__buttonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 4px;
+  font-size: 12px;
+
+  &:not(:last-of-type) {
+    margin-right: 12px;
   }
 }
 </style>
