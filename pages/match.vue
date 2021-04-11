@@ -30,7 +30,45 @@
               <div class="profileImgWrapper">
                 <img
                   class="profileImg"
-                  src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                  src="https://mikan.bita.jp/img/members_img/16019679213tatsuya_takahashi_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">9</div>
+            </div>
+          </li>
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/16097438781toshinobu_sato_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">6</div>
+            </div>
+          </li>
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/15656647750seiya_sakata_mikan.jpg"
                   :alt="commonMatchUser.user.picture"
                 />
               </div>
@@ -38,6 +76,63 @@
                 <div class="userName">{{ commonMatchUser.user.name }}</div>
               </div>
               <div class="matchNumber">5</div>
+            </div>
+          </li>
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/15656647750seiya_sakata_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">3</div>
+            </div>
+          </li>
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/15656647750seiya_sakata_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">2</div>
+            </div>
+          </li>
+          <li
+            v-for="commonMatchUser in commonMatchList"
+            :key="commonMatchUser.id"
+            class="matchItemCard"
+          >
+            <div class="cardInner">
+              <div class="profileImgWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/15656647750seiya_sakata_mikan.jpg"
+                  :alt="commonMatchUser.user.picture"
+                />
+              </div>
+              <div>
+                <div class="userName">{{ commonMatchUser.user.name }}</div>
+              </div>
+              <div class="matchNumber">1</div>
             </div>
           </li>
         </transition-group>
@@ -53,11 +148,11 @@
               <div class="notMatchProfileWrapper">
                 <img
                   class="profileImg"
-                  src="https://mikan.bita.jp//img/members_img/15857163963koudai_kudou_mikan.jpg"
+                  src="https://mikan.bita.jp/img/members_img/15226410800makoto_tatsumi_mikan.jpg"
                   :alt="uncommonMatchUser.user.picture"
                 />
               </div>
-              <div class="userName">KU{{ uncommonMatchUser.user.name }}DO</div>
+              <div class="userName">まことさん</div>
             </div>
             <ul class="commonTagsList">
               <li
@@ -65,7 +160,32 @@
                 :key="commonProfile"
                 class="commonTagItem"
               >
-                出身地が近しい
+                出身地が近い
+              </li>
+            </ul>
+          </li>
+          <li
+            v-for="uncommonMatchUser in uncommonMatchList"
+            :key="uncommonMatchUser.id"
+            class="notMatchItemCard"
+          >
+            <div class="notMatchCardHeader">
+              <div class="notMatchProfileWrapper">
+                <img
+                  class="profileImg"
+                  src="https://mikan.bita.jp/img/members_img/15857163963koudai_kudou_mikan.jpg"
+                  :alt="uncommonMatchUser.user.picture"
+                />
+              </div>
+              <div class="userName">工藤 昂大</div>
+            </div>
+            <ul class="commonTagsList">
+              <li
+                v-for="commonProfile in commonProfiles"
+                :key="commonProfile"
+                class="commonTagItem"
+              >
+                ボードゲーム
               </li>
             </ul>
           </li>
@@ -215,7 +335,7 @@ export default {
 }
 .commonTagItem {
   color: #ff773e;
-  background-color: #ffdbc9;
+  background-color: #ffefe0;
   border-radius: 10px;
   padding: 4px 6px;
   font-weight: 600;
