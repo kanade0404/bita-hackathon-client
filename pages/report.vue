@@ -3,11 +3,7 @@
     <Header />
     <main class="report">
       <div class="container">
-        <form
-          class="reviewForm"
-          action="http://localhost:8080/api/review"
-          method="post"
-        >
+        <form class="reviewForm" action="" method="post">
           <fieldset class="reviewForm__item">
             <legend class="reviewForm__title">店舗レビュー</legend>
             <textarea
@@ -19,7 +15,11 @@
           </fieldset>
           <input type="hidden" name="userId" value="" />
           <input type="hidden" name="reviewId" value="" />
-          <button class="reviewForm__submitButton" type="submit">
+          <button
+            @click="toReviewScreen($event)"
+            class="reviewForm__submitButton"
+            type="submit"
+          >
             投稿する
           </button>
         </form>
@@ -34,6 +34,12 @@ import Header from '../components/common/Header'
 export default {
   components: {
     Header,
+  },
+  methods: {
+    toReviewScreen(event) {
+      event.preventDefault()
+      this.$router.push('/review')
+    },
   },
 }
 </script>
