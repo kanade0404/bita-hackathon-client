@@ -79,12 +79,15 @@ export default {
       })
         .then((response) => {
           const { data } = response.data
+          if (!data.length) {
+            return Promise.reject(Error('empty data'))
+          }
           data.forEach((element) => {
             this.nearRestaurants.push(element)
           })
         })
         .catch((err) => {
-          console.log('err:', err)
+          console.error('err:', err)
         })
     },
   },
