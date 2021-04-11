@@ -215,7 +215,7 @@ export default {
 }
 .commonTagItem {
   color: #ff773e;
-  background-color: #ffdbc9;
+  background-color: #ffefe0;
   border-radius: 10px;
   padding: 4px 6px;
   font-weight: 600;
