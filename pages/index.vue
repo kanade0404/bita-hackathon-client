@@ -1,5 +1,6 @@
 <template>
   <main class="top">
+    <Header />
     <div class="container">
       <section class="top__mainContent">
         <h2 class="top__heading">店舗選択</h2>
@@ -32,7 +33,12 @@
 
 <script>
 import axios from 'axios'
+import Header from '../components/common/Header'
+
 export default {
+  components: {
+    Header,
+  },
   data() {
     return {
       currentLocation: {

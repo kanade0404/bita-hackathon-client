@@ -1,75 +1,93 @@
 <template>
-  <div class="container">
-    <div class="usersMe">
-      <div class="usersImg">
-        <img src="https://placehold.jp/150x150.png" alt="サンプル画像" />
-      </div>
-      <div class="info">
-        <div class="edit">
-          <span class="edit__title">Name:</span>
-          <input class="edit__input" type="text" />
+  <Fragment>
+    <Header />
+    <div class="container">
+      <div class="usersMe">
+        <div class="usersImg">
+          <img
+            class="usersImg__img"
+            :src="userData.picture"
+            alt="サンプル画像"
+          />
         </div>
-        <div class="edit">
-          <span class="edit__title">tags:</span>
-          <input class="edit__input" type="text" />
+        <div class="info">
+          <div class="edit">
+            <span class="edit__title">Name</span>
+            <input class="edit__input" type="text" :value="userData.name" />
+          </div>
+          <div class="edit">
+            <span class="edit__title">tags</span>
+            <input class="edit__input" type="text" />
+          </div>
+          <span class="like" v-for="(item, index) in likes" :key="index">
+            #{{ item }}
+          </span>
+          <div class="edit edit--desc">
+            <div class="edit__desc">description</div>
+            <textarea class="edit__textarea" type="text" />
+          </div>
+          <button @click="changeProfile" class="submit">change</button>
         </div>
-        <span class="like" v-for="(item, index) in likes" :key="index">
-          #{{ item }}
-        </span>
-        <div class="edit edit--desc">
-          <div class="edit__desc">description:</div>
-          <textarea class="edit__textarea" type="text" />
-        </div>
-        <button class="submit">送信</button>
       </div>
     </div>
-  </div>
+  </Fragment>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Header from '../components/common/Header'
+
 export default {
+  components: { Header },
   data() {
     return {
       likes: [
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
-        '好きなもの',
+        'モンスターハンター',
+        '柿',
+        '山',
+        'お祈り',
+        'Vue',
+        'React',
+        '初心者',
+        'つながりたい',
       ],
     }
+  },
+  computed: {
+    ...mapState(['userData']),
+  },
+  methods: {
+    changeProfile() {
+      this.$router.push('/user')
+    },
   },
 }
 </script>
 
 <style scoped lang="scss">
 .usersMe {
-  display: flex;
-  justify-content: center;
-  margin: 100px auto 0;
-  width: 800px;
+  margin: 50px auto 0;
 }
 
 .usersImg {
-  flex: 1 0 auto;
   overflow: hidden;
   border-radius: 150px;
   height: 150px;
   width: 150px;
-  margin-right: 50px;
+  margin: 0 auto 50px;
+}
+
+.usersImg__img {
+  height: 150px;
+  width: 150px;
 }
 
 .edit {
+  text-align: center;
   align-items: center;
   display: flex;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
 
   &--desc {
     display: block;
@@ -80,7 +98,7 @@ export default {
 .edit__title {
   display: inline-block;
   width: 70px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -92,14 +110,20 @@ export default {
   font-size: 14px;
 }
 
+.info {
+  text-align: center;
+  margin: 0 auto 50px;
+  max-width: 800px;
+}
+
 .like {
   display: inline-block;
   padding-right: 3px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .edit__desc {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   margin-right: 10px;
   margin-bottom: 10px;
