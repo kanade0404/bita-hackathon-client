@@ -1,10 +1,14 @@
 <template>
   <div class="container">
     <div class="inner">
-      <h1 class="logo" @click="toHomeScreen">
+      <h1 class="logo">
         <img class="logo__img" src="/logo.png" alt="ロゴ" />
       </h1>
-      <a class="login" href="http://localhost:8080/auth/google">ログイン</a>
+      <a
+        class="login"
+        :href="`https://hackathon-starter-305913.an.r.appspot.com/auth/google`"
+        >ログイン</a
+      >
     </div>
   </div>
 </template>

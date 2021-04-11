@@ -1,4 +1,11 @@
+require('dotenv').config()
+
 export default {
+  env: {
+    baseUrl:
+      process.env.BASE_URL ||
+      'https://hackathon-starter-305913.an.r.appspot.com',
+  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
