@@ -128,7 +128,7 @@ export default {
       reader.readAsDataURL(file)
     },
     changeProfile() {
-      axios.post(`${process.env.baseUrl}/api/user`, {
+      axios.post(`https://hackathon-starter-305913.an.r.appspot.com/api/user`, {
         id: this.userData._id,
         name: this.editUserName,
         description: this.editDiscription,

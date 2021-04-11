@@ -104,7 +104,7 @@ export default {
   },
   created() {
     axios
-      .get(`${process.env.baseUrl}/api/review/`)
+      .get(`https://hackathon-starter-305913.an.r.appspot.com/api/review/`)
       .then((result) => {
         this.reviewList = result.data.data
       })

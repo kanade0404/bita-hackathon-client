@@ -61,7 +61,7 @@ export default {
 
     try {
       const { data } = await axios.get(
-        `${process.env.baseUrl}/api/user/${userId}`
+        `https://hackathon-starter-305913.an.r.appspot.com/api/user/${userId}`
       )
       this.setUserActions(data.data)
       return
@@ -93,7 +93,7 @@ export default {
     },
     logout() {
       this.$cookies.set('token', '')
-      window.location = `${process.env.baseUrl}/logout`
+      window.location = `https://hackathon-starter-305913.an.r.appspot.com/logout`
     },
     toHomeScreen() {
       this.setMenuClose()

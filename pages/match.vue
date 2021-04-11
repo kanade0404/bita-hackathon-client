@@ -212,7 +212,7 @@ export default {
   },
   created() {
     axios
-      .get('http://localhost:8080/api/review/')
+      .get('https://hackathon-starter-305913.an.r.appspot.com/api/review/')
       .then((result) => {
         this.commonMatchList = result.data.data
         this.uncommonMatchList = result.data.data

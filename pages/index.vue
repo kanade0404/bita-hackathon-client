@@ -115,7 +115,8 @@ export default {
     async getNearRestaurant() {
       await axios({
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Access-Control-Allow-Origin':
+            'https://hackathon-starter-305913.an.r.appspot.com',
         },
         method: 'get',
         url: `/api/store`,
