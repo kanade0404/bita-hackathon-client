@@ -4,21 +4,21 @@
     <div class="container">
       <div class="usersMe">
         <div class="usersImg">
-          <img
-            class="usersImg__img"
-            :src="userData.picture"
-            alt="サンプル画像"
-          />
+          <img class="usersImg__img" :src="setImg" alt="サンプル画像" />
         </div>
         <div class="info">
-          <p class="name">{{ userData.name }}</p>
+          <p class="name">{{ userName }}</p>
           <div class="likes">
-            <span v-for="(item, index) in likes" :key="index" class="like">
+            <span
+              v-for="(item, index) in userData.tags"
+              :key="index"
+              class="like"
+            >
               #{{ item }}
             </span>
           </div>
           <p class="description">
-            自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介
+            {{ userData.description ? userData.description : '' }}
           </p>
         </div>
         <div class="editWrapper">
@@ -51,6 +51,14 @@ export default {
   },
   computed: {
     ...mapState(['userData']),
+    userName() {
+      return this.userData.profile ? this.userData.profile.name : ''
+    },
+    setImg() {
+      return this.userData.profile
+        ? `data:image/png;base64,${this.userData.profile.picture}`
+        : ''
+    },
   },
   methods: {
     toEditScreen() {
