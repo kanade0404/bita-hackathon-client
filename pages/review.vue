@@ -94,7 +94,7 @@ export default {
   },
   created() {
     axios
-      .get('http://localhost:8080/api/review/')
+      .get(`${process.env.baseUrl}/api/review/`)
       .then((result) => {
         this.reviewList = result.data.data
       })
